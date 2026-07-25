@@ -29,8 +29,6 @@ import {
   Palette,
   Coffee,
   Bookmark,
-  CloudFog,
-  Aperture,
 } from 'lucide-react';
 
 interface LeftSidebarProps {
@@ -61,8 +59,6 @@ interface LeftSidebarProps {
 }
 
 const CATEGORY_ICONS: Record<string, React.ReactNode> = {
-  'Mood & Atmosphere': <CloudFog className="h-3.5 w-3.5 text-indigo-400" />,
-  'Specialty & Film Stocks': <Aperture className="h-3.5 w-3.5 text-pink-400" />,
   'Cinematic & Film': <Film className="h-3.5 w-3.5 text-purple-400" />,
   'Subject-Focused': <User className="h-3.5 w-3.5 text-cyan-400" />,
   'Vintage & Analog Film': <Film className="h-3.5 w-3.5 text-amber-400" />,
@@ -75,8 +71,6 @@ const CATEGORY_ICONS: Record<string, React.ReactNode> = {
 };
 
 const CATEGORIES_ORDER: PresetCategory[] = [
-  'Mood & Atmosphere',
-  'Specialty & Film Stocks',
   'Cinematic & Film',
   'Subject-Focused',
   'Vintage & Analog Film',
@@ -120,10 +114,8 @@ export const LeftSidebar: React.FC<LeftSidebarProps> = ({
 
   // Accordion expanded state for categories
   const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({
-    'Mood & Atmosphere': true,
-    'Specialty & Film Stocks': true,
-    'Cinematic & Film': false,
-    'Subject-Focused': false,
+    'Cinematic & Film': true,
+    'Subject-Focused': true,
     'Vintage & Analog Film': false,
     'Modern Cinematic Tones': false,
     'Portrait & Skin Retouching': false,

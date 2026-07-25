@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { ViewMode, LiquidGlassTheme } from '../types/editor';
+import { ViewMode } from '../types/editor';
 import {
   Upload,
   Undo2,
@@ -15,7 +15,6 @@ import {
   Sun,
   Moon,
   Sparkles,
-  Flame,
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -39,8 +38,8 @@ interface HeaderProps {
   onFileUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onOpenExportModal: () => void;
 
-  theme: LiquidGlassTheme;
-  onChangeTheme: (theme: LiquidGlassTheme) => void;
+  themeMode: 'dark' | 'light';
+  onToggleThemeMode: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -64,8 +63,8 @@ export const Header: React.FC<HeaderProps> = ({
   onFileUpload,
   onOpenExportModal,
 
-  theme,
-  onChangeTheme,
+  themeMode,
+  onToggleThemeMode,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -194,45 +193,24 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Right Controls: Theme Switcher, Zoom & Export */}
       <div className="flex items-center gap-3">
-        {/* Liquid Glass 3-Theme Selector */}
-        <div className="flex items-center rounded-full bg-black/30 border border-white/20 p-1 backdrop-blur-xl shadow-inner gap-1">
+        {/* iOS Dark / Light Glass Switcher */}
+        <div className="flex items-center rounded-full bg-black/30 border border-white/20 p-1 backdrop-blur-xl shadow-inner">
           <button
-            onClick={() => onChangeTheme('cosmic-dark')}
-            title="Liquid Glass: Cosmic Dark (Studio Default)"
-            className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-extrabold transition-all cursor-pointer active:scale-95 ${
-              theme === 'cosmic-dark'
-                ? 'bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 text-white shadow-md shadow-blue-500/40 border border-white/30'
-                : 'text-neutral-400 hover:text-white hover:bg-white/10'
-            }`}
+            onClick={onToggleThemeMode}
+            title={themeMode === 'dark' ? 'Switch to Daylight Mode (iOS Light Glass)' : 'Switch to Studio Mode (iOS Dark Glass)'}
+            className="flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-extrabold transition-all active:scale-95 cursor-pointer hover:bg-white/20"
           >
-            <Moon className="h-3 w-3 text-cyan-300 drop-shadow shrink-0" />
-            <span className="hidden sm:inline">Cosmic</span>
-          </button>
-
-          <button
-            onClick={() => onChangeTheme('polar-light')}
-            title="Liquid Glass: Polar Light (Daylight Mode)"
-            className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-extrabold transition-all cursor-pointer active:scale-95 ${
-              theme === 'polar-light'
-                ? 'bg-gradient-to-r from-sky-500 via-blue-500 to-indigo-500 text-white shadow-md shadow-sky-500/40 border border-white/40'
-                : 'text-neutral-400 hover:text-white hover:bg-white/10'
-            }`}
-          >
-            <Sun className="h-3 w-3 text-amber-300 drop-shadow shrink-0" />
-            <span className="hidden sm:inline">Polar</span>
-          </button>
-
-          <button
-            onClick={() => onChangeTheme('sunset-aurora')}
-            title="Liquid Glass: Sunset Aurora (Vibrant & Warm)"
-            className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-extrabold transition-all cursor-pointer active:scale-95 ${
-              theme === 'sunset-aurora'
-                ? 'bg-gradient-to-r from-rose-500 via-pink-500 to-amber-500 text-white shadow-md shadow-rose-500/40 border border-white/30'
-                : 'text-neutral-400 hover:text-white hover:bg-white/10'
-            }`}
-          >
-            <Flame className="h-3 w-3 text-amber-200 drop-shadow shrink-0" />
-            <span className="hidden sm:inline">Sunset</span>
+            {themeMode === 'dark' ? (
+              <>
+                <Moon className="h-3.5 w-3.5 text-indigo-400 drop-shadow" />
+                <span className="text-neutral-200">Dark Glass</span>
+              </>
+            ) : (
+              <>
+                <Sun className="h-3.5 w-3.5 text-amber-500 drop-shadow" />
+                <span className="text-neutral-800">Light Glass</span>
+              </>
+            )}
           </button>
         </div>
 
