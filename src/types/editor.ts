@@ -100,6 +100,8 @@ export interface HistoryItem {
 }
 
 export type PresetCategory =
+  | 'Mood & Atmosphere'
+  | 'Specialty & Film Stocks'
   | 'Cinematic & Film'
   | 'Subject-Focused'
   | 'Vintage & Analog Film'
@@ -110,6 +112,8 @@ export type PresetCategory =
   | 'Social & Lifestyle'
   | 'Built-in'
   | 'User';
+
+export type LiquidGlassTheme = 'cosmic-dark' | 'polar-light' | 'sunset-aurora';
 
 export interface Preset {
   id: string;

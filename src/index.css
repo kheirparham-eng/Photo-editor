@@ -34,7 +34,7 @@
 
   .animate-liquid-mesh {
     background-size: 220% 220%;
-    animation: liquidMeshFlow 16s ease infinite;
+    animation: liquidMeshFlow 18s ease infinite;
     will-change: background-position;
   }
 
@@ -43,64 +43,128 @@
     transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
   }
 
-  /* iOS Liquid Glass Dark Mode Theme Rules */
-  .ios-dark-mode {
-    --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 40%, rgba(18, 18, 24, 0.70) 100%);
-    --glass-bg-hover: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.06) 40%, rgba(28, 28, 36, 0.80) 100%);
-    --glass-bg-active: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.08) 40%, rgba(40, 40, 52, 0.90) 100%);
-    --glass-border: rgba(255, 255, 255, 0.22);
-    --glass-border-subtle: rgba(255, 255, 255, 0.12);
+  /* ==========================================
+     LIQUID GLASS THEME ENGINES
+     ========================================== */
+
+  /* 1. Liquid Glass: Cosmic Dark (Studio Default) */
+  .theme-cosmic-dark {
+    --glass-bg: linear-gradient(135deg, rgba(15, 18, 28, 0.72) 0%, rgba(18, 22, 35, 0.62) 100%);
+    --glass-bg-solid: rgba(15, 18, 28, 0.65);
+    --glass-bg-hover: rgba(255, 255, 255, 0.12);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --glass-border-subtle: rgba(255, 255, 255, 0.08);
     --glass-highlight: rgba(255, 255, 255, 0.45);
-    --glass-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.6), inset 0 1.5px 0 0 rgba(255, 255, 255, 0.35), inset 0 -1px 0 0 rgba(0, 0, 0, 0.3);
-    --text-main: #f5f5f7;
-    --text-muted: #a1a1aa;
-    --accent-blue: #3b82f6;
-    --accent-glow: rgba(59, 130, 246, 0.45);
+    --glass-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.65), inset 0 1.5px 0 0 rgba(255, 255, 255, 0.25);
+    --glass-blur: blur(24px) saturate(180%);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --accent-color: #3b82f6;
+    --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #6366f1 50%, #06b6d4 100%);
+    --accent-glow: rgba(59, 130, 246, 0.5);
+    --input-bg: rgba(0, 0, 0, 0.35);
+    --mesh-bg-1: rgba(59, 130, 246, 0.22);
+    --mesh-bg-2: rgba(99, 102, 241, 0.20);
+    --mesh-bg-3: rgba(168, 85, 247, 0.18);
+    --mesh-base: linear-gradient(135deg, #090c15 0%, #0d111d 30%, #150f2a 70%, #0a0d18 100%);
   }
 
-  /* iOS Liquid Glass Light Mode (Daylight Mode) Theme Rules */
-  .ios-light-mode {
-    --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.65) 40%, rgba(240, 243, 248, 0.80) 100%);
-    --glass-bg-hover: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.75) 40%, rgba(245, 247, 252, 0.90) 100%);
-    --glass-bg-active: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.85) 40%, rgba(230, 235, 245, 0.95) 100%);
+  /* 2. Liquid Glass: Polar Light (Daylight Mode) */
+  .theme-polar-light {
+    --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(241, 245, 249, 0.55) 100%);
+    --glass-bg-solid: rgba(255, 255, 255, 0.50);
+    --glass-bg-hover: rgba(255, 255, 255, 0.85);
     --glass-border: rgba(255, 255, 255, 0.85);
-    --glass-border-subtle: rgba(255, 255, 255, 0.60);
+    --glass-border-subtle: rgba(203, 213, 225, 0.6);
     --glass-highlight: rgba(255, 255, 255, 0.95);
-    --glass-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.18), inset 0 1.5px 0 0 rgba(255, 255, 255, 0.95), inset 0 -1px 0 0 rgba(0, 0, 0, 0.08);
-    --text-main: #1d1d1f;
-    --text-muted: #6e6e73;
-    --accent-blue: #2563eb;
-    --accent-glow: rgba(37, 99, 235, 0.3);
+    --glass-shadow: 0 12px 32px rgba(0, 0, 0, 0.08), inset 0 1.5px 0 0 rgba(255, 255, 255, 0.95);
+    --glass-blur: blur(24px) saturate(190%);
+    --text-main: #0f172a;
+    --text-muted: #334155;
+    --text-dim: #64748b;
+    --accent-color: #0284c7;
+    --accent-gradient: linear-gradient(135deg, #0284c7 0%, #2563eb 50%, #4f46e5 100%);
+    --accent-glow: rgba(2, 132, 199, 0.35);
+    --input-bg: rgba(255, 255, 255, 0.60);
+    --mesh-bg-1: rgba(186, 230, 253, 0.65);
+    --mesh-bg-2: rgba(224, 242, 254, 0.80);
+    --mesh-bg-3: rgba(207, 250, 254, 0.60);
+    --mesh-base: linear-gradient(135deg, #e0f2fe 0%, #f1f5f9 25%, #e2e8f0 50%, #f0f9ff 75%, #e0f2fe 100%);
+  }
+
+  /* 3. Liquid Glass: Sunset Aurora (Vibrant & Warm) */
+  .theme-sunset-aurora {
+    --glass-bg: linear-gradient(135deg, rgba(28, 20, 35, 0.68) 0%, rgba(35, 18, 38, 0.58) 100%);
+    --glass-bg-solid: rgba(28, 20, 35, 0.55);
+    --glass-bg-hover: rgba(251, 113, 133, 0.18);
+    --glass-border: rgba(251, 113, 133, 0.30);
+    --glass-border-subtle: rgba(244, 63, 94, 0.18);
+    --glass-highlight: rgba(253, 164, 175, 0.55);
+    --glass-shadow: 0 24px 60px -12px rgba(15, 5, 20, 0.7), inset 0 1.5px 0 0 rgba(251, 113, 133, 0.35);
+    --glass-blur: blur(24px) saturate(200%);
+    --text-main: #fff1f2;
+    --text-muted: #fca5a5;
+    --text-dim: #f43f5e;
+    --accent-color: #f43f5e;
+    --accent-gradient: linear-gradient(135deg, #f43f5e 0%, #ec4899 50%, #f59e0b 100%);
+    --accent-glow: rgba(244, 63, 94, 0.55);
+    --input-bg: rgba(20, 10, 25, 0.45);
+    --mesh-bg-1: rgba(244, 63, 94, 0.35);
+    --mesh-bg-2: rgba(245, 158, 11, 0.32);
+    --mesh-bg-3: rgba(192, 38, 211, 0.35);
+    --mesh-base: linear-gradient(135deg, #1f0b24 0%, #2e0e2d 25%, #3d1020 50%, #230825 75%, #180720 100%);
+  }
+
+  /* Text & Border Theme Utilities */
+  .text-theme-main {
+    color: var(--text-main);
+  }
+
+  .text-theme-muted {
+    color: var(--text-muted);
+  }
+
+  .border-theme-glass {
+    border-color: var(--glass-border);
   }
 
   /* Glassmorphism Panel Base */
   .ios-glass-card {
     background: var(--glass-bg);
-    backdrop-filter: blur(32px) saturate(210%);
-    -webkit-backdrop-filter: blur(32px) saturate(210%);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
     position: relative;
-    will-change: backdrop-filter, transform;
+    will-change: transform, backdrop-filter;
+    transform: translateZ(0);
+    color: var(--text-main);
   }
 
   /* Header / Toolbar Glass Bar */
   .ios-glass-bar {
     background: var(--glass-bg);
-    backdrop-filter: blur(32px) saturate(210%);
-    -webkit-backdrop-filter: blur(32px) saturate(210%);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
     border-bottom: 1px solid var(--glass-border);
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18), inset 0 1.5px 0 0 var(--glass-highlight), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: var(--glass-shadow);
+    will-change: transform, backdrop-filter;
+    transform: translateZ(0);
+    color: var(--text-main);
   }
 
   /* Floating iOS Pill Dock */
   .ios-glass-dock {
     background: var(--glass-bg);
-    backdrop-filter: blur(36px) saturate(220%);
-    -webkit-backdrop-filter: blur(36px) saturate(220%);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
     border: 1.5px solid var(--glass-border);
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45), inset 0 2px 2px var(--glass-highlight), inset 0 -1px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--glass-shadow);
     border-radius: 9999px;
+    will-change: transform, backdrop-filter;
+    transform: translateZ(0);
+    color: var(--text-main);
   }
 
   /* Glossy Interactive Button / Pill */
@@ -109,41 +173,39 @@
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.4), inset 0 -1px 0 rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.4);
     transition: all 0.25s cubic-bezier(0.32, 0.72, 0, 1);
     position: relative;
     overflow: hidden;
   }
 
   .ios-glass-button:hover {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.14) 100%);
+    background: var(--glass-bg-hover);
     border-color: var(--glass-highlight);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.25), inset 0 1.5px 0 rgba(255,255,255,0.6), 0 0 15px var(--accent-glow);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2), inset 0 1.5px 0 rgba(255,255,255,0.6), 0 0 15px var(--accent-glow);
     transform: translateY(-1px);
   }
 
   .ios-glass-button:active {
     transform: scale(0.95);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3), inset 0 1px 2px rgba(0,0,0,0.3);
   }
 
   /* Glossy Segmented Control Pill */
   .ios-segmented-pill {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.7), 0 4px 12px rgba(0, 0, 0, 0.25);
+    background: var(--accent-gradient);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.7), 0 4px 12px var(--accent-glow);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  /* Dynamic Theme Glossy Active Button Accent */
+  .ios-glossy-accent {
+    background: var(--accent-gradient);
+    box-shadow: 0 6px 20px var(--accent-glow), inset 0 1.5px 0 rgba(255, 255, 255, 0.55), inset 0 -1.5px 0 rgba(0, 0, 0, 0.25);
     border: 1px solid rgba(255, 255, 255, 0.35);
   }
 
-  /* iPhone Glossy Blue Button Accent */
-  .ios-glossy-blue {
-    background: linear-gradient(180deg, #60a5fa 0%, #2563eb 50%, #1d4ed8 100%);
-    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45), inset 0 1.5px 0 rgba(255, 255, 255, 0.55), inset 0 -1.5px 0 rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.35);
-  }
-
-  .ios-glossy-blue:hover {
-    background: linear-gradient(180deg, #93c5fd 0%, #3b82f6 50%, #1e40af 100%);
-    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.6), inset 0 2px 0 rgba(255, 255, 255, 0.7);
+  .ios-glossy-accent:hover {
+    box-shadow: 0 8px 25px var(--accent-glow), inset 0 2px 0 rgba(255, 255, 255, 0.7);
   }
 
   /* iOS Custom Range Slider Thumb & Track */
@@ -162,18 +224,18 @@
     border-radius: 50%;
     background: radial-gradient(circle at 35% 35%, #ffffff 0%, #e2e8f0 70%, #cbd5e1 100%);
     border: 1.5px solid rgba(255, 255, 255, 0.95);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4), inset 0 1.5px 1.5px rgba(255, 255, 255, 0.95), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3), inset 0 1.5px 1.5px rgba(255, 255, 255, 0.95), 0 0 10px var(--accent-glow);
     transition: transform 0.2s cubic-bezier(0.32, 0.72, 0, 1), box-shadow 0.2s ease;
   }
 
   input[type='range'].ios-slider::-webkit-slider-thumb:hover {
     transform: scale(1.25);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), inset 0 2px 2px rgba(255, 255, 255, 1), 0 0 12px rgba(59, 130, 246, 0.6);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), inset 0 2px 2px rgba(255, 255, 255, 1), 0 0 14px var(--accent-glow);
   }
 
   input[type='range'].ios-slider::-webkit-slider-thumb:active {
     transform: scale(1.4);
-    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.6), inset 0 2px 2px rgba(255, 255, 255, 1), 0 0 18px rgba(59, 130, 246, 0.8);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.5), inset 0 2px 2px rgba(255, 255, 255, 1), 0 0 20px var(--accent-glow);
   }
 }
 

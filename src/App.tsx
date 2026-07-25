@@ -11,6 +11,7 @@ import {
   HistogramData,
   ImageInfo,
   ViewMode,
+  LiquidGlassTheme,
 } from './types/editor';
 import {
   createDefaultAdjustments,
@@ -30,8 +31,8 @@ import { ExportModal } from './components/ExportModal';
 const CUSTOM_PRESETS_STORAGE_KEY = 'lightroom_studio_custom_presets';
 
 export default function App() {
-  // Theme Mode State: iOS Dark Glass (Studio) vs iOS Light Glass (Daylight)
-  const [themeMode, setThemeMode] = useState<'dark' | 'light'>('dark');
+  // Theme State: 3 Liquid Glass Themes (Cosmic Dark, Polar Light, Sunset Aurora)
+  const [theme, setTheme] = useState<LiquidGlassTheme>('cosmic-dark');
 
   // Image Source State (Full-Res vs Downsampled Preview)
   const [fullResImageSource, setFullResImageSource] = useState<HTMLImageElement | null>(null);
@@ -402,10 +403,24 @@ export default function App() {
 
   return (
     <div
-      className={`flex h-screen w-screen flex-col overflow-hidden font-sans antialiased select-none ios-spring ${
-        themeMode === 'dark' ? 'ios-dark-mode bg-slate-950 text-neutral-100' : 'ios-light-mode bg-slate-100 text-slate-900'
-      }`}
+      className={`flex h-screen w-screen flex-col overflow-hidden font-sans antialiased select-none ios-spring relative theme-${theme}`}
     >
+      {/* Ambient Liquid Mesh Background Layer */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        <div
+          className="absolute inset-0 animate-liquid-mesh opacity-90 transition-all duration-700"
+          style={{ background: 'var(--mesh-base)' }}
+        />
+        <div
+          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full blur-[120px] opacity-40 animate-pulse pointer-events-none"
+          style={{ background: 'var(--mesh-bg-1)' }}
+        />
+        <div
+          className="absolute bottom-1/3 right-1/4 w-[600px] h-[600px] rounded-full blur-[140px] opacity-35 animate-pulse pointer-events-none"
+          style={{ background: 'var(--mesh-bg-2)' }}
+        />
+      </div>
+
       {/* Top Header Navigation Bar */}
       <Header
         canUndo={currentHistoryIndex > 0}
@@ -425,8 +440,8 @@ export default function App() {
           if (e.target.files?.[0]) handleLoadFile(e.target.files[0]);
         }}
         onOpenExportModal={() => setIsExportModalOpen(true)}
-        themeMode={themeMode}
-        onToggleThemeMode={() => setThemeMode((prev) => (prev === 'dark' ? 'light' : 'dark'))}
+        theme={theme}
+        onChangeTheme={setTheme}
       />
 
       {/* Main Studio Workspace */}
