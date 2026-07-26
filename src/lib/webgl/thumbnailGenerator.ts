@@ -9,6 +9,7 @@ import { WebGLPhotoRenderer } from './renderer';
 export async function generatePresetThumbnails(
   sourceImage: HTMLImageElement | HTMLCanvasElement,
   presets: Preset[],
+  onBatchDone?: (batchMap: Record<string, string>) => void,
   thumbWidth = 140,
   thumbHeight = 90
 ): Promise<Record<string, string>> {
@@ -36,10 +37,11 @@ export async function generatePresetThumbnails(
   const defaultAdj = createDefaultAdjustments();
 
   // Process in small async batches to avoid blocking main thread
-  const BATCH_SIZE = 4;
+  const BATCH_SIZE = 6;
   for (let i = 0; i < presets.length; i += BATCH_SIZE) {
     const batch = presets.slice(i, i + BATCH_SIZE);
-    
+    const batchResult: Record<string, string> = {};
+
     for (const preset of batch) {
       const adj: PhotoAdjustments = {
         ...defaultAdj,
@@ -48,10 +50,16 @@ export async function generatePresetThumbnails(
 
       renderer.render(adj);
       try {
-        resultMap[preset.id] = offscreenCanvas.toDataURL('image/jpeg', 0.85);
+        const url = offscreenCanvas.toDataURL('image/jpeg', 0.82);
+        resultMap[preset.id] = url;
+        batchResult[preset.id] = url;
       } catch (e) {
         console.warn(`Failed to generate thumbnail for preset ${preset.id}`, e);
       }
+    }
+
+    if (onBatchDone) {
+      onBatchDone(batchResult);
     }
 
     // Yield control to main event loop for smooth UI interaction

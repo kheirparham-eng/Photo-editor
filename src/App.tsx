@@ -102,8 +102,8 @@ export default function App() {
   // Generate Preset Thumbnails whenever previewImageSource or presets change
   useEffect(() => {
     if (previewImageSource) {
-      generatePresetThumbnails(previewImageSource, presets).then((thumbs) => {
-        setPresetThumbnails(thumbs);
+      generatePresetThumbnails(previewImageSource, presets, (batch) => {
+        setPresetThumbnails((prev) => ({ ...prev, ...batch }));
       });
     }
   }, [previewImageSource, presets]);
@@ -214,12 +214,7 @@ export default function App() {
     (newAdj: PhotoAdjustments, actionLabel = 'Adjustment') => {
       // Immediate 60fps canvas render update
       setBaseAdjustments(newAdj);
-      if (activePresetObj) {
-        const blended = blendPresetAdjustments(newAdj, activePresetObj.adjustments, presetIntensity);
-        setAdjustments(blended);
-      } else {
-        setAdjustments(newAdj);
-      }
+      setAdjustments(newAdj);
 
       // Debounce history timeline entries so slider dragging doesn't flood history
       if (historyDebounceRef.current) {
@@ -241,7 +236,7 @@ export default function App() {
         setCurrentHistoryIndex((prev) => prev + 1);
       }, 300);
     },
-    [currentHistoryIndex, activePresetObj, presetIntensity]
+    [currentHistoryIndex]
   );
 
   // Preset Selection & Blending Handlers
@@ -250,14 +245,20 @@ export default function App() {
     setActivePresetObj(preset.id === 'preset-original' ? null : preset);
     setPresetIntensity(100);
 
-    const merged = blendPresetAdjustments(baseAdjustments, preset.adjustments, 100);
-    setAdjustments(merged);
+    const defaultBase = createDefaultAdjustments();
+    const targetAdjustments =
+      preset.id === 'preset-original'
+        ? defaultBase
+        : blendPresetAdjustments(defaultBase, preset.adjustments, 100);
+
+    setBaseAdjustments(defaultBase);
+    setAdjustments(targetAdjustments);
 
     const newHistoryItem: HistoryItem = {
       id: `preset-${Date.now()}`,
       timestamp: Date.now(),
       label: `Preset: ${preset.name}`,
-      adjustments: merged,
+      adjustments: targetAdjustments,
     };
 
     setHistory((prev) => [...prev.slice(0, currentHistoryIndex + 1), newHistoryItem]);

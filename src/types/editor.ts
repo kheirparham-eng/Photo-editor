@@ -100,6 +100,12 @@ export interface HistoryItem {
 }
 
 export type PresetCategory =
+  | 'Commercial & Studio Editorial'
+  | 'Fine Art Architecture & Urban'
+  | 'Professional Landscape & Nature'
+  | 'Night & High-ISO Street Photography'
+  | 'Classic Analog Film Emulations'
+  | 'Food & Product Photography'
   | 'Cinematic & Film'
   | 'Subject-Focused'
   | 'Vintage & Analog Film'

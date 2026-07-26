@@ -29,6 +29,10 @@ import {
   Palette,
   Coffee,
   Bookmark,
+  Camera,
+  Building2,
+  Moon,
+  Utensils,
 } from 'lucide-react';
 
 interface LeftSidebarProps {
@@ -59,7 +63,13 @@ interface LeftSidebarProps {
 }
 
 const CATEGORY_ICONS: Record<string, React.ReactNode> = {
-  'Cinematic & Film': <Film className="h-3.5 w-3.5 text-purple-400" />,
+  'Commercial & Studio Editorial': <Camera className="h-3.5 w-3.5 text-rose-400" />,
+  'Fine Art Architecture & Urban': <Building2 className="h-3.5 w-3.5 text-cyan-400" />,
+  'Professional Landscape & Nature': <Trees className="h-3.5 w-3.5 text-emerald-400" />,
+  'Night & High-ISO Street Photography': <Moon className="h-3.5 w-3.5 text-purple-400" />,
+  'Classic Analog Film Emulations': <Film className="h-3.5 w-3.5 text-amber-400" />,
+  'Food & Product Photography': <Utensils className="h-3.5 w-3.5 text-orange-400" />,
+  'Cinematic & Film': <Film className="h-3.5 w-3.5 text-indigo-400" />,
   'Subject-Focused': <User className="h-3.5 w-3.5 text-cyan-400" />,
   'Vintage & Analog Film': <Film className="h-3.5 w-3.5 text-amber-400" />,
   'Modern Cinematic Tones': <Clapperboard className="h-3.5 w-3.5 text-teal-400" />,
@@ -71,6 +81,12 @@ const CATEGORY_ICONS: Record<string, React.ReactNode> = {
 };
 
 const CATEGORIES_ORDER: PresetCategory[] = [
+  'Commercial & Studio Editorial',
+  'Fine Art Architecture & Urban',
+  'Professional Landscape & Nature',
+  'Night & High-ISO Street Photography',
+  'Classic Analog Film Emulations',
+  'Food & Product Photography',
   'Cinematic & Film',
   'Subject-Focused',
   'Vintage & Analog Film',
@@ -114,8 +130,14 @@ export const LeftSidebar: React.FC<LeftSidebarProps> = ({
 
   // Accordion expanded state for categories
   const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({
-    'Cinematic & Film': true,
-    'Subject-Focused': true,
+    'Commercial & Studio Editorial': true,
+    'Fine Art Architecture & Urban': true,
+    'Professional Landscape & Nature': false,
+    'Night & High-ISO Street Photography': false,
+    'Classic Analog Film Emulations': false,
+    'Food & Product Photography': false,
+    'Cinematic & Film': false,
+    'Subject-Focused': false,
     'Vintage & Analog Film': false,
     'Modern Cinematic Tones': false,
     'Portrait & Skin Retouching': false,
